@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use Paysera\Config\Config;
-use \Paysera\Models\Currency;
+use Paysera\Models\Currency;
 
 class CurrencyTest extends TestCase
 {
@@ -20,7 +20,6 @@ class CurrencyTest extends TestCase
     public function testEuroConversion()
     {
         $euro = new Currency('EUR', 1.0, 2);
-
 
         $this->assertEquals(1000, $euro->convertToEuro(1000));
     }

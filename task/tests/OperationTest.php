@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use \Paysera\Models\User;
+use Paysera\Models\User;
 use Paysera\Config\Config;
-use \Paysera\Models\Currency;
+use Paysera\Models\Currency;
 use Paysera\Models\Operation;
 
 
@@ -72,7 +72,6 @@ class OperationTest extends TestCase
 
         $operation = new Operation($date, $type, $amount, $currency, $user);
 
-
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('illegal type incorrect');
 
@@ -93,5 +92,4 @@ class OperationTest extends TestCase
 
         $this->assertEquals($currencyNew, $operation->getCurrency());
     }
-
 }

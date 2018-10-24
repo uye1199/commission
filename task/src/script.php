@@ -2,8 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Paysera\Services\Reader;
-use \Paysera\Services\Commission;
-use Paysera\Models\Currency;
+use Paysera\Services\Commission;
 use Paysera\Config\Config;
 
 if ($argc != 2) {

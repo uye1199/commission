@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use \Paysera\Models\User;
+use Paysera\Models\User;
 
 class UserTest extends TestCase
 {
