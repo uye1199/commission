@@ -6,6 +6,7 @@ class User
 {
     const TYPE_NATURAL = 'natural';
     const TYPE_LEGAL = 'legal';
+    private $allowedUserTypes;
 
     private $id;
     private $userType;
@@ -14,8 +15,9 @@ class User
 
     public function __construct($id, $userType)
     {
-        $this->id = $id;
-        $this->userType = $userType;
+        $this->allowedUserTypes = [self::TYPE_LEGAL, self::TYPE_NATURAL];
+        $this->setId($id);
+        $this->setUserType($userType);
     }
 
     /**
@@ -43,10 +45,15 @@ class User
     }
 
     /**
-     * @param mixed $userType
+     * @param $userType
+     * @throws \Exception
      */
     public function setUserType($userType)
     {
+        if (!in_array($userType, $this->allowedUserTypes)){
+            throw new \InvalidArgumentException("illegal user type $userType");
+        }
+
         $this->userType = $userType;
     }
 

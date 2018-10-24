@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Paysera\Services\Reader;
 use Paysera\Models\Operation;
 use Paysera\Models\User;
-use Paysera\Services\Config;
+use Paysera\Config\Config;
 
 
 class CsvTest extends TestCase
@@ -15,10 +15,10 @@ class CsvTest extends TestCase
         $config = new Config();
         $currencies = $config->getCurrencies();
 
-        $reader = new Reader('/var/www/html/tests/input.csv', $currencies);
+        $reader = new Reader('csv/test.csv', $currencies);
         $operations = $reader->readFile();
 
-        $operation = new Operation(
+        $operation1 = new Operation(
             '2014-12-31',
             'cash_out',
             1200.00,
@@ -26,6 +26,15 @@ class CsvTest extends TestCase
             new User(4, 'natural')
         );
 
-        $this->assertEquals($operation, $operations[0]);
+        $operation2 = new Operation(
+            '2015-01-01',
+            'cash_out',
+            1000.00,
+            $currencies['EUR'],
+            new User(4, 'natural')
+        );
+
+        $this->assertEquals($operation1, $operations[0]);
+        $this->assertEquals($operation2, $operations[1]);
     }
 }

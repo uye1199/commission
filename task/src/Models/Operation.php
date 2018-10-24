@@ -98,6 +98,10 @@ class Operation
      */
     public function setType($type)
     {
+        if (!in_array($type, $this->allowedTypes)){
+            throw new \InvalidArgumentException("illegal type $type");
+        }
+
         $this->type = $type;
     }
 

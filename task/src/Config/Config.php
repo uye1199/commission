@@ -1,5 +1,5 @@
 <?php
-namespace Paysera\Services;
+namespace Paysera\Config;
 
 use Paysera\Models\Currency;
 
@@ -35,7 +35,4 @@ class Config
     {
         $this->currencies = $currencies;
     }
-
-
 }
-

@@ -20,7 +20,11 @@ class Reader
      */
     public function __construct($fileSource, $currencies, $header = false)
     {
-        $this->fileSource = $fileSource;
+        $absolutePath = dirname(__DIR__) . '/';
+
+
+
+        $this->fileSource = $absolutePath . $fileSource;
         $this->header = $header;
         $this->currencies = $currencies;
     }

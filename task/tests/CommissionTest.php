@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Paysera\Services\Commission;
 use Paysera\Models\User;
 use Paysera\Models\Operation;
-use Paysera\Services\Config;
+use Paysera\Config\Config;
 
 class CommissionTest extends TestCase
 {
