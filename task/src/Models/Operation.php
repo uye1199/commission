@@ -8,7 +8,7 @@ class Operation
     private $amount;
     private $currency;
     private $user;
-    private $allowed_types = ['cash_in', 'cash_out'];
+    private $allowedTypes = ['cash_in', 'cash_out'];
     private $week;
 
 
@@ -23,7 +23,7 @@ class Operation
      */
     public function __construct($date, $type, $amount, $currency, User $user)
     {
-        if (!in_array($type, $this->allowed_types)) {
+        if (!in_array($type, $this->allowedTypes)) {
             throw new \Exception('operation type inconsistent', 100);
         }
 

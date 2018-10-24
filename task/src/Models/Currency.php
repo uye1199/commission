@@ -4,17 +4,17 @@ namespace Paysera\Models;
 class Currency
 {
     private $currency;
-    private $conversion_rate;
+    private $conversionRate;
 
     /**
      * Currency constructor.
      * @param $currency
-     * @param $conversion_rate
+     * @param $conversionRate
      */
-    public function __construct($currency, $conversion_rate)
+    public function __construct($currency, $conversionRate)
     {
         $this->currency = $currency;
-        $this->conversion_rate = $conversion_rate;
+        $this->conversionRate = $conversionRate;
     }
 
     /**
@@ -38,15 +38,15 @@ class Currency
      */
     public function getConversionRate()
     {
-        return $this->conversion_rate;
+        return $this->conversionRate;
     }
 
     /**
-     * @param mixed $conversion_rate
+     * @param mixed $conversionRate
      */
-    public function setConversionRate($conversion_rate)
+    public function setConversionRate($conversionRate)
     {
-        $this->conversion_rate = $conversion_rate;
+        $this->conversionRate = $conversionRate;
     }
 
     /**

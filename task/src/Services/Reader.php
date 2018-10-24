@@ -8,17 +8,17 @@ use Paysera\Models\User;
 
 class Reader
 {
-    private $file_source;
+    private $fileSource;
     private $header = false;
 
     /**
      * Reader constructor.
-     * @param $file_source
+     * @param $fileSource
      * @param bool $header
      */
-    public function __construct($file_source, $header = false)
+    public function __construct($fileSource, $header = false)
     {
-        $this->file_source = $file_source;
+        $this->fileSource = $fileSource;
         $this->header = $header;
     }
 
@@ -27,15 +27,15 @@ class Reader
      */
     public function getFileSource()
     {
-        return $this->file_source;
+        return $this->fileSource;
     }
 
     /**
-     * @param mixed $file_source
+     * @param mixed $fileSource
      */
-    public function setFileSource($file_source)
+    public function setFileSource($fileSource)
     {
-        $this->file_source = $file_source;
+        $this->fileSource = $fileSource;
     }
 
     /**
@@ -45,7 +45,7 @@ class Reader
      */
     public function readFile()
     {
-        $handle = fopen($this->file_source, "r");
+        $handle = fopen($this->fileSource, "r");
         $result = [];
 
         while ($csvLine = fgetcsv($handle, 1000, ",")) {
@@ -54,18 +54,18 @@ class Reader
                 $this->header = false;
             } else {
 
-                $operation_date = $csvLine[0];
-                $user_identificator = $csvLine[1];
-                $user_type = $csvLine[2];
-                $operation_type = $csvLine[3];
-                $operation_amount = $csvLine[4];
-                $operation_currency = $csvLine[5];
+                $operationDate = $csvLine[0];
+                $userIdentificator = $csvLine[1];
+                $userType = $csvLine[2];
+                $operationType = $csvLine[3];
+                $operationAmount = $csvLine[4];
+                $operationCurrency = $csvLine[5];
 
-                $user = new User($user_identificator, $user_type);
+                $user = new User($userIdentificator, $userType);
 
                 try {
                     $operation = new Operation(
-                        $operation_date, $operation_type, $operation_amount, $operation_currency, $user
+                        $operationDate, $operationType, $operationAmount, $operationCurrency, $user
                     );
                     $result[] = $operation;
 

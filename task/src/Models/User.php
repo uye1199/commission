@@ -5,16 +5,16 @@ namespace Paysera\Models;
 class User
 {
     private $id;
-    private $user_type;
+    private $userType;
 
     public static $userOperations = [];
     public static $TYPE_NATURAL = 'natural';
     public static $TYPE_LEGAL = 'legal';
 
-    public function __construct($id, $user_type)
+    public function __construct($id, $userType)
     {
         $this->id = $id;
-        $this->user_type = $user_type;
+        $this->userType = $userType;
     }
 
     /**
@@ -38,15 +38,15 @@ class User
      */
     public function getUserType()
     {
-        return $this->user_type;
+        return $this->userType;
     }
 
     /**
-     * @param mixed $user_type
+     * @param mixed $userType
      */
-    public function setUserType($user_type)
+    public function setUserType($userType)
     {
-        $this->user_type = $user_type;
+        $this->userType = $userType;
     }
 
     /**
