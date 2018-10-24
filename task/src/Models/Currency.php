@@ -89,8 +89,8 @@ class Currency
     {
         if ($this->getPrecision() === 0) {
             return ceil($amount);
-        } else {
-            return number_format(round($amount, $this->getPrecision() + 1), $this->getPrecision());
         }
+
+        return number_format(round($amount, $this->getPrecision() + 1), $this->getPrecision());
     }
 }

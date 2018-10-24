@@ -40,7 +40,6 @@ class CommissionTest extends TestCase
 
     public function testCalculateNaturalCashOut()
     {
-
         $user = new User(4, 'natural');
         $operation = new Operation('2016-01-05', 'cash_out', 1200.00, $this->currencies['EUR'], $user);
         $commission = new Commission([$operation]);
@@ -51,7 +50,6 @@ class CommissionTest extends TestCase
 
     public function testCalculateNaturalCashOutJpy()
     {
-
         $user = new User(1, 'natural');
         $operation = new Operation('2016-01-06', 'cash_out', 30000.00, $this->currencies['JPY'], $user);
         $commission = new Commission([$operation]);
@@ -62,7 +60,6 @@ class CommissionTest extends TestCase
 
     public function testCalculateNaturalCashOutMultiple()
     {
-
         $user = new User(1, 'natural');
         $operation_1 = new Operation('2014-12-31', 'cash_out', 1200.00, $this->currencies['EUR'], $user);
         $operation_2 = new Operation('2015-01-01', 'cash_out', 1000.00, $this->currencies['EUR'], $user);

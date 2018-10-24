@@ -1,8 +1,6 @@
 <?php
 namespace Paysera\Services;
 
-
-use Paysera\Models\Currency;
 use Paysera\Models\Operation;
 use Paysera\Models\User;
 
@@ -26,15 +24,6 @@ class Commission
     public function __construct(array $operations)
     {
         $this->operations = $operations;
-    }
-
-    /**
-     * @param $currency
-     * @return Currency
-     */
-    private function getOperationCurrency($currency)
-    {
-        return $this->currency[$currency];
     }
 
     /**
@@ -71,7 +60,6 @@ class Commission
      */
     private function calculateCashIn(Operation $operation)
     {
-        $currency = $operation->getCurrency();
         $commission = $operation->getAmount() * $this->cashInCommission;
 
         if ($commission > $this->cashInMaxLimit) {
@@ -142,7 +130,6 @@ class Commission
      */
     private function calculateLegalCashOut(Operation $operation)
     {
-        $currency = $operation->getCurrency();
         $commission     = $operation->getAmount() * $this->cashOutLegalCommission;
         $converted = $operation->getCurrency()->convertToEuro($operation->getAmount()) * $this->cashOutLegalCommission;
 

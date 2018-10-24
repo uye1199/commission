@@ -81,7 +81,6 @@ class Operation
      */
     public function setDate($date)
     {
-        //$date .= " 12:00:00";
         $this->date = new \DateTime($date);
     }
 
