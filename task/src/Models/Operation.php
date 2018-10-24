@@ -21,7 +21,7 @@ class Operation
      * @param User $user
      * @throws \Exception
      */
-    public function __construct($date, $type, $amount, $currency, User $user)
+    public function __construct($date, $type, $amount, Currency $currency, User $user)
     {
         if (!in_array($type, $this->allowedTypes)) {
             throw new \Exception('operation type inconsistent', 100);
@@ -44,11 +44,12 @@ class Operation
     }
 
     /**
+     * Set week number. Weeks start from unix timestamp starting date 01-01-1970
      * @param \DateTime $date
      */
     public function setWeek(\DateTime $date)
     {
-        $this->week = intval($date->format('W'));
+        $this->week = floor(($date->getTimestamp() - 86400 * 4) / (86400 * 7)) + 1;
     }
 
     /**

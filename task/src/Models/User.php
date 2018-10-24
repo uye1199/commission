@@ -4,12 +4,13 @@ namespace Paysera\Models;
 
 class User
 {
+    const TYPE_NATURAL = 'natural';
+    const TYPE_LEGAL = 'legal';
+
     private $id;
     private $userType;
 
-    public static $userOperations = [];
-    public static $TYPE_NATURAL = 'natural';
-    public static $TYPE_LEGAL = 'legal';
+    public $userOperations = [];
 
     public function __construct($id, $userType)
     {
@@ -50,54 +51,43 @@ class User
     }
 
     /**
-     * @param User $user
      * @param $year
      * @param $month
      * @param $week
      * @param $amount
      */
-    public static function setUserOperations(User $user, $year, $month, $week, $amount)
+    public function setWeeklyUserOperationAmount($week, $amount)
     {
-        if ($month == 12  && $week == 1) {
-            $year += 1;
-        }
-
-        self::$userOperations[$user->getId()][$year][$week][] = $amount;
+        $this->userOperations[$week][] = $amount;
     }
 
     /**
-     * @param User $user
      * @return mixed
      */
-    public static function getUserOperations(User $user)
+    public function getUserOperations()
     {
-        return self::$userOperations[$user->getId()];
+        return $this->userOperations;
     }
 
     /**
-     * @param User $user
      * @param $year
      * @param $month
      * @param $week
      * @return array
      */
-    public static function getAmoutOfUserOperationsforWeek(User $user, $year, $month, $week)
+    public function getAmoutOfUserOperationsForWeek($week)
     {
-        if ($month == 12  && $week == 1) {
-            $year += 1;
-        }
-
-        $operations = self::getUserOperations($user)[$year][$week];
+        $operations = $this->getUserOperations();
+        $weeklyOperations = $operations[$week];
         $count = 0;
         $amount = 0;
 
-        if (is_array($operations) && count($operations) > 0) {
-            foreach ($operations as $key => $value) {
+        if (is_array($weeklyOperations) && count($weeklyOperations) > 0) {
+            foreach ($weeklyOperations as $key => $value) {
                 $amount += $value;
                 $count++;
             }
         }
-
 
         return ['amount' => $amount, 'count' => $count];
     }

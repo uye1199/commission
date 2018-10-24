@@ -10,16 +10,19 @@ class Reader
 {
     private $fileSource;
     private $header = false;
+    private $users = [];
+    private $currencies;
 
     /**
      * Reader constructor.
      * @param $fileSource
      * @param bool $header
      */
-    public function __construct($fileSource, $header = false)
+    public function __construct($fileSource, $currencies, $header = false)
     {
         $this->fileSource = $fileSource;
         $this->header = $header;
+        $this->currencies = $currencies;
     }
 
     /**
@@ -53,7 +56,6 @@ class Reader
             if ($this->header) {
                 $this->header = false;
             } else {
-
                 $operationDate = $csvLine[0];
                 $userIdentificator = $csvLine[1];
                 $userType = $csvLine[2];
@@ -61,16 +63,20 @@ class Reader
                 $operationAmount = $csvLine[4];
                 $operationCurrency = $csvLine[5];
 
-                $user = new User($userIdentificator, $userType);
+                if (array_key_exists($userIdentificator, $this->users)) {
+                    $user = $this->users[$userIdentificator];
+                } else {
+                    $user = new User($userIdentificator, $userType);
+                    $this->users[$userIdentificator] = $user;
+                }
 
                 try {
                     $operation = new Operation(
-                        $operationDate, $operationType, $operationAmount, $operationCurrency, $user
+                        $operationDate, $operationType, $operationAmount, $this->currencies[$operationCurrency], $user
                     );
                     $result[] = $operation;
-
                 } catch (\Exception $e) {
-                    echo $e->getMessage();
+                    //echo $e->getMessage();
                 }
             }
         }
